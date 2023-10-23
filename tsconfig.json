@@ -11,12 +11,8 @@
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "Node",
     "esModuleInterop": true,
-    "strictPropertyInitialization": false,
+    "strictPropertyInitialization": false
   },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
 }
