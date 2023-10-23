@@ -1,0 +1,51 @@
+{
+  "name": "store-be",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node main.ts",
+    "setup": "ts-node setupDb.ts",
+    "format": "prettier . --ignore-path .gitignore --write",
+    "lint": "eslint . --ignore-path .gitignore --fix",
+    "fix-code-style": "npm run format & npm run lint",
+    "prepare": "husky install",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.20",
+    "@types/node": "^20.8.7",
+    "@types/validator": "^13.11.5",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.0.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "eslint": "^8.52.0",
+    "express": "^4.18.2",
+    "gh-pages": "^6.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.0.2",
+    "pg": "^8.11.3",
+    "pg-hstore": "^2.3.4",
+    "prettier": "^3.0.3",
+    "reflect-metadata": "^0.1.13",
+    "sequelize": "^6.33.0",
+    "sequelize-typescript": "^2.1.5"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "lint-staged": {
+    "*.tsx": "npm run fix-code-style"
+  }
+}
