@@ -10,6 +10,7 @@ export const sequelize = new Sequelize(URI, {
   models: [Product],
   dialectOptions: {
     ssl: true,
+    rejectUnauthorized: false,
   },
 });
 
