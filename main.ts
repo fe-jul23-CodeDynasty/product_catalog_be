@@ -1,5 +1,7 @@
-import {server} from './src/index';
+import { createServer } from './src/createServer';
+import { connect } from './src/utils/db';
 
-server.listen(443, () => {
-	console.log('Server is running!');
+createServer().listen(443, () => {
+  console.log('Server is running!');
+  connect();
 });
