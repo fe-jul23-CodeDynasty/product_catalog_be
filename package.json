@@ -2,12 +2,15 @@
   "name": "store-be",
   "version": "1.0.0",
   "description": "",
-  "main": "main.ts",
+  "main": "./src/main.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node main.ts",
+    "dev": "nodemon ./src/main.ts",
+    "start": "node build/main.js",
+    "db-migrate": "sequelize-cli db:migrate",
+    "build": "npm run db-migrate; tsc",
     "format": "prettier . --ignore-path .gitignore --write",
-    "lint": "eslint . --ignore-path .gitignore --fix",
+    "lint": "eslint . --ignore-path .eslintignore --fix",
     "fix-code-style": "npm run format & npm run lint",
     "prepare": "husky install"
   },
@@ -37,8 +40,10 @@
     "lint-staged": "11.2.6",
     "prettier": "^3.0.3",
     "reflect-metadata": "^0.1.13",
+    "sequelize-cli": "^6.6.1",
     "ts-node": "^10.9.1",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "nodemon": "^3.0.1"
   },
   "lint-staged": {
     "*.ts": "npm run fix-code-style"

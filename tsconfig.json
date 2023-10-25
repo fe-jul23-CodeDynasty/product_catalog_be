@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
+    "module": "CommonJS",
     "sourceMap": true,
     "target": "ES2016",
-    "outDir": "./dist",
+    "outDir": "./build",
     "baseUrl": "./src",
     "alwaysStrict": true,
     "noImplicitAny": true,
