@@ -10,7 +10,7 @@ const getAllByQuery = async (req: express.Request, res: express.Response) => {
   const totalPages = query.itemsOnPage
     ? Math.ceil(totalItems / Number(query.itemsOnPage))
     : 1;
-  const currentPage = query.page ? Number(query.page) : 1;
+  const currentPage = query.currentPage ? Number(query.currentPage) : 1;
 
   res.send({
     products,

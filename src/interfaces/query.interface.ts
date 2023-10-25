@@ -1,6 +1,6 @@
 export interface IQuery {
   sortBy?: string;
   itemsOnPage?: string;
-  page?: string;
+  currentPage?: string;
   direction?: 'ASC' | 'DESC';
 }

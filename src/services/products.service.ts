@@ -11,8 +11,9 @@ const getAllByQuery = async (query: IQuery) => {
     options.order = [[query.sortBy, query.direction || 'ASC']];
   }
 
-  if (query.itemsOnPage && query.page) {
-    options.offset = (Number(query.page) - 1) * Number(query.itemsOnPage);
+  if (query.itemsOnPage && query.currentPage) {
+    options.offset =
+      (Number(query.currentPage) - 1) * Number(query.itemsOnPage);
     options.limit = Number(query.itemsOnPage);
   }
 

@@ -9,8 +9,10 @@ const URI = process.env.DB_URL;
 export const sequelize = new Sequelize(URI, {
   models: [Product],
   dialectOptions: {
-    ssl: true,
-    rejectUnauthorized: false,
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
   },
 });
 
