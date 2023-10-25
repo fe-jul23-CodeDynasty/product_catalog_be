@@ -7,6 +7,8 @@ export function createServer() {
 
   app.use(cors());
 
+  app.use(express.static('public'));
+
   app.use('/products', express.json(), productsRouter);
 
   return app;
