@@ -3,4 +3,7 @@ export interface IQuery {
   itemsOnPage?: string;
   currentPage?: string;
   direction?: 'ASC' | 'DESC';
+  category?: Category;
 }
+
+export type Category = 'accessories' | 'tablets' | 'phones';

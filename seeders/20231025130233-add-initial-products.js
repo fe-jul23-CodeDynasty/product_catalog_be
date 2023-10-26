@@ -1,5 +1,5 @@
 'use strict';
-const phones = require('../public/api/phones.json');
+const phones = require('../public/api/products.json');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {

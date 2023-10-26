@@ -1,4 +1,4 @@
-import { IQuery } from '../interfaces/query.interface';
+import { Category, IQuery } from '../interfaces/query.interface';
 import { Product } from '../models';
 import { FindOptions } from 'sequelize';
 
@@ -17,13 +17,27 @@ const getAllByQuery = async (query: IQuery) => {
     options.limit = Number(query.itemsOnPage);
   }
 
+  if (query.category) {
+    options.where = {
+      category: query.category,
+    };
+  }
+
   const products = await Product.findAll(options);
 
   return products;
 };
 
-const getAllCount = async () => {
-  const count = await Product.count();
+const getAllCount = async (category: Category) => {
+  const options: FindOptions = {};
+
+  if (category) {
+    options.where = {
+      category: category,
+    };
+  }
+
+  const count = await Product.count(options);
 
   return count;
 };
