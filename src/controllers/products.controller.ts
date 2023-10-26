@@ -6,7 +6,7 @@ const getAllByQuery = async (req: express.Request, res: express.Response) => {
   const query: IQuery = req.query;
 
   const products = await productsService.getAllByQuery(query);
-  const totalItems = await productsService.getAllCount();
+  const totalItems = await productsService.getAllCount(query.category);
   const totalPages = query.itemsOnPage
     ? Math.ceil(totalItems / Number(query.itemsOnPage))
     : 1;
