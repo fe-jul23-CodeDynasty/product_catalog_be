@@ -1,6 +1,7 @@
 import express from 'express';
 import { IQuery } from '../interfaces/query.interface';
 import productsService from './../services/products.service';
+import pageProductsService from './../services/pageProducts.service';
 
 const getAllByQuery = async (req: express.Request, res: express.Response) => {
   const query: IQuery = req.query;
@@ -20,4 +21,12 @@ const getAllByQuery = async (req: express.Request, res: express.Response) => {
   });
 };
 
-export default { getAllByQuery };
+const getAllInfoById = async (req: express.Request, res: express.Response) => {
+  const id: string = req.params.id;
+
+  const product = await pageProductsService.getAllInfoById(id);
+
+  res.send(product);
+};
+
+export default { getAllByQuery, getAllInfoById };
