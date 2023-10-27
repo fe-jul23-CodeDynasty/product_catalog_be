@@ -29,4 +29,17 @@ const getAllInfoById = async (req: express.Request, res: express.Response) => {
   res.send(product);
 };
 
-export default { getAllByQuery, getAllInfoById };
+const getRecommendedById = async (
+  req: express.Request,
+  res: express.Response,
+) => {
+  const id: string = req.params.id;
+
+  const recommended = await productsService.getRecommendedById(id);
+
+  const preparedRecommended = productsService.prepareRecommended(recommended);
+
+  res.send(preparedRecommended);
+};
+
+export default { getAllByQuery, getAllInfoById, getRecommendedById };

@@ -3,14 +3,10 @@ const tablets = require('../public/api/tablets.json');
 const accessories = require('../public/api/accessories.json');
 const phones = require('../public/api/phones.json');
 
-const pageProducts = [
-  ...phones,
-  ...tablets,
-  ...accessories,
-].map(product => ({
+const pageProducts = [...phones, ...tablets, ...accessories].map(product => ({
   ...product,
-  description: JSON.stringify(product.description)
-}))
+  description: JSON.stringify(product.description),
+}));
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
