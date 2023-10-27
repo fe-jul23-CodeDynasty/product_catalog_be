@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize-typescript';
-import { Product } from '../models';
+import { Product, PageProduct } from '../models';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -7,7 +7,7 @@ dotenv.config();
 const URI = process.env.DB_URL;
 
 export const sequelize = new Sequelize(URI, {
-  models: [Product],
+  models: [Product, PageProduct],
   dialectOptions: {
     ssl: {
       require: true,
