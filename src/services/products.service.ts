@@ -46,7 +46,7 @@ const getAllCount = async (category: Category) => {
 const getRecommendedById = async (id: string) => {
   const details = id.split('-');
   const category = details[1];
-  let query;
+  let query = '';
 
   if (category === 'watch') {
     if (details.length === 7) {
