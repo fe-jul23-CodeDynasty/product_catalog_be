@@ -2,8 +2,11 @@ import { shuffle } from '../utils/shuffleArray';
 import { Category, IQuery } from '../interfaces/query.interface';
 import { Product } from '../models';
 import { FindOptions, Op } from 'sequelize';
+import { convertArrayToString } from '../utils/convertArrayToString';
 
-const getAllByQuery = async (query: IQuery) => {
+const DEFAULT_LIMIT = 24;
+
+const getAll = async (query: IQuery): Promise<Product[]> => {
   const options: FindOptions = {
     order: ['id'],
   };
@@ -24,12 +27,12 @@ const getAllByQuery = async (query: IQuery) => {
     };
   }
 
-  const products = await Product.findAll(options);
+  const products: Product[] = await Product.findAll(options);
 
   return products;
 };
 
-const getAllCount = async (category: Category) => {
+const getAllCount = async (category: Category): Promise<number> => {
   const options: FindOptions = {};
 
   if (category) {
@@ -38,35 +41,35 @@ const getAllCount = async (category: Category) => {
     };
   }
 
-  const count = await Product.count(options);
+  const count: number = await Product.count(options);
 
   return count;
 };
 
-const getRecommendedById = async (id: string) => {
+const getRecommendedById = async (id: string): Promise<Product[]> => {
   const details = id.split('-');
   const category = details[1];
   let query = '';
 
   if (category === 'watch') {
     if (details.length === 7) {
-      query = details.slice(0, 4).join('-');
+      query = convertArrayToString(details, '-', 0, 4);
     }
 
     if (details.length === 6 || details.length === 5) {
-      query = details.slice(0, 3).join('-');
+      query = convertArrayToString(details, '-', 0, 3);
     }
   }
 
   if (category === 'ipad') {
-    query = details.slice(0, 4).join('-');
+    query = convertArrayToString(details, '-', 0, 4);
   }
 
   if (category === 'iphone') {
-    query = details.slice(0, 3).join('-');
+    query = convertArrayToString(details, '-', 0, 3);
   }
 
-  const recommended = await Product.findAll({
+  const recommended: Product[] = await Product.findAll({
     where: {
       itemId: {
         [Op.like]: query + '%',
@@ -77,15 +80,35 @@ const getRecommendedById = async (id: string) => {
   return recommended;
 };
 
-const prepareRecommended = (recommended: Product[]) => {
-  const shuffleRecommended = shuffle(recommended);
+const prepare = (products: Product[]): Product[] => {
+  const prepared = shuffle(products);
 
-  return shuffleRecommended.slice(0, 8);
+  return prepared.slice(0, 8);
+};
+
+const getNew = async (): Promise<Product[]> => {
+  const newProducts: Product[] = await Product.findAll({
+    order: [['year', 'DESC']],
+    limit: DEFAULT_LIMIT,
+  });
+
+  return newProducts;
+};
+
+const getDiscount = async (): Promise<Product[]> => {
+  const discount: Product[] = await Product.findAll({
+    order: [Product.sequelize.literal('("price"*100)/"fullPrice"')],
+    limit: DEFAULT_LIMIT,
+  });
+
+  return discount;
 };
 
 export default {
-  getAllByQuery,
+  getAll,
   getAllCount,
   getRecommendedById,
-  prepareRecommended,
+  prepare,
+  getNew,
+  getDiscount,
 };

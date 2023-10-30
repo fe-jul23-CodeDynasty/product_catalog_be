@@ -1,7 +1,7 @@
 import { PageProduct } from '../models';
 
-const getAllInfoById = async (id: string) => {
-  const product = await PageProduct.findOne({
+const getById = async (id: string): Promise<PageProduct | null> => {
+  const product: PageProduct | null = await PageProduct.findOne({
     where: {
       id,
     },
@@ -10,4 +10,4 @@ const getAllInfoById = async (id: string) => {
   return product;
 };
 
-export default { getAllInfoById };
+export default { getById };
