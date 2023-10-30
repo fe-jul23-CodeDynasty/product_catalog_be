@@ -1,7 +1,12 @@
 import { createServer } from './createServer';
 import { connect } from './utils/db';
+import dotenv from 'dotenv';
 
-createServer().listen(443, () => {
-  console.log('Server is running!');
+dotenv.config();
+
+const PORT = process.env.PORT;
+
+createServer().listen(PORT, () => {
+  console.log(`Server is running on port: ${PORT}!`);
   connect();
 });
